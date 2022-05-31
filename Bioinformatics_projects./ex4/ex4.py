@@ -93,7 +93,7 @@ def my_procedue(X):
     bmi_age_gender_mat = calc_bmi_age_gender_mat()
     temp_X = copy.deepcopy(X)
     for i in range(100):
-        index_to_keep = np.random.choice(len(temp_X),len(temp_X)//2)
+        index_to_keep = np.random.choice(len(temp_X),len(temp_X)//2,replace= False)
         rand_X = np.array(temp_X[index_to_keep])
         temp_mat = copy.deepcopy(bmi_age_gender_mat)
         rand_mat = np.array(temp_mat[index_to_keep])

@@ -29,20 +29,28 @@ def local_pwalignment(S, T, score=score):
     seq1 = ""
     seq2 = ""
     res = 0
-    arr_pointers = [[0 for i in range(len(T)+1)] for j in range(len(S)+1)] #init pointer helper arr
-    mat = [[0 for i in range(len(T)+1)] for j in range(len(S)+1)] #init main matrix
+    #init pointer helper arr
+    arr_pointers = [[0 for i in range(len(T)+1)] for j in range(len(S)+1)] 
+    #init main matrix
+    mat = [[0 for i in range(len(T)+1)] for j in range(len(S)+1)] 
     max_val = 0
     max_val_index =(-1,-1)
-    #****make the score matrix***#
+    
+    #****generate the score matrix***#
     for i in range(1,len(S)+1):
         for j in range(1,len(T)+1):
             mat[i][j] = max(mat[i-1][j-1] + score(S[i-1],T[j-1]), mat[i][j-1] + score("-",T[j-1]) , mat[i-1][j] + score(S[i-1],"-"), 0)
-            max_pre_index = calc_max_index(S,T,i,j,mat) #deciding where to point backwords
-            arr_pointers[i][j] = max_pre_index #update pointer arr
+            
+            #deciding where to point backwords
+            max_pre_index = calc_max_index(S,T,i,j,mat) 
+            
+            #update pointer arr
+            arr_pointers[i][j] = max_pre_index 
             if mat[i][j] > max_val:
                 max_val = mat[i][j]
                 max_val_index = (i,j)
-    #****trace back***#
+    
+    #***trace back***#
     i = max_val_index[0]
     j = max_val_index[1]
     while mat[i][j] != 0:

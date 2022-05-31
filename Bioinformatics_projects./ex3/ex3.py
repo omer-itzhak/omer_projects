@@ -97,14 +97,20 @@ def find_min_cell(D): # helper_func C
 
 def mat_union(D,tuppels_lst,pair_to_unite): # helper_func C
     current_tupple = tuppels_lst[pair_to_unite[0]]
-    for j in range(0, pair_to_unite[0]): #This part fix the matrix row of the first index in pair to unite cuple
+    
+    #This part fix the matrix row of the first index in pair to unite cuple
+    for j in range(0, pair_to_unite[0]):
         distance = (D.get(pair_to_unite[0], j) * current_tupple[0].size + D.get(pair_to_unite[1], j) *current_tupple[1].size) / current_tupple.size
         D.set(distance, pair_to_unite[0], j)
-        D.set(distance,j,pair_to_unite[0]) # updating the mat symmetrically
-    for i in range(pair_to_unite[0] + 1, D.row - 1): #This part fix the matrix col of the first index in pair to unite cuple
+        # updating the mat symmetrically
+        D.set(distance,j,pair_to_unite[0]) 
+        
+    #This part fix the matrix col of the first index in pair to unite cuple
+    for i in range(pair_to_unite[0] + 1, D.row - 1): 
         distance = (D.get(i, pair_to_unite[0]) * current_tupple[0].size + D.get(i, pair_to_unite[1]) *current_tupple[1].size) / current_tupple.size
         D.set(distance, i, pair_to_unite[0])
         D.set(distance,pair_to_unite[0],i) # updating the mat symmetrically
+    
     # delete used row and col
     D.row_delete(pair_to_unite[1] + 1)
     D.col_delet(pair_to_unite[1] + 1)
@@ -115,8 +121,10 @@ def tree_union(tuppels_lst,pair_to_unite): # helper_func C
     b_ind = pair_to_unite[1]
     a_tup = tuppels_lst[a_ind]
     b_tup = tuppels_lst[b_ind]
-    a_tup.merge_tup(b_tup) # creating new tup - size is updating accordingly
-    del tuppels_lst[b_ind] # deleting used tup
+    # creating new tup - size is updating accordingly
+    a_tup.merge_tup(b_tup) 
+    # deleting used tup
+    del tuppels_lst[b_ind] 
 
 ##Question C - main function
 def upgma(D, seq_names_lst):

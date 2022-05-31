@@ -241,13 +241,15 @@ def generate_random_seqs(seq_lst_msa): # helper_func E
     temp_seqs = ["" for i in range(len(seq_lst_msa))]
     for i in range(len(seq_lst_msa[0])):
         x = random.randint(0,1)
-        if x == 0: #if x = 0 we are taking the i' index for the new randomaized seqs
+        #if x = 0 we are taking the i' index for the new randomaized seqs
+        if x == 0: 
             for j in range(len(seq_lst_msa)):
                 temp = temp_seqs[j]
                 temp += seq_lst_msa[j][i]
                 temp_seqs[j] = temp
     for i in range(len(temp_seqs)):
-        temp = temp_seqs[i].replace("-","") #remove all gaps from the new seqs
+        #remove all gaps from the new seqs
+        temp = temp_seqs[i].replace("-","") 
         temp_seqs[i] = temp
     return temp_seqs
 
@@ -318,7 +320,7 @@ def eval_dist(seq_lst, msa_aln_path, dist_func=globalpw_dist()):
         T_rnd = upgma(dist_mat_rnd,names_lst)
         tup_dict_rnd = generate_tup_dict(T_rnd,{})
         for tup in tup_dict:
-            if tup_found(tup,tup_dict_rnd): # without consideration of order!
+            if tup_found(tup,tup_dict_rnd):
                 tup_dict[tup] += 1
     return tup_dict
 
